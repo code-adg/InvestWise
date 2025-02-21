@@ -22,6 +22,7 @@ export const Navbar = () => {
             <Link to="/profile" className="nav-link">Profile</Link>
             <Link to="/saved" className="nav-link">Saved Schemes</Link>
             <Link to="/about" className="nav-link">About</Link>
+            <Link to="/investments" className='nav-link'>Investement Advisor</Link>
             <ThemeToggle />
           </div>
         </div>
