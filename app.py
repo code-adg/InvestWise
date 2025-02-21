@@ -1,15 +1,18 @@
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from langchain.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import LLMChain
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
 # Initialize Gemini LLM with API Key
 def initialize_llm():
-    gemini_api_key = "AIzaSyAEzctJ3QK61LAUjmIoTEvDuTV9FFKt-vc"  # Replace with your actual Gemini API key
+    gemini_api_key = os.getenv("GEMINI_API_KEY")  # Replace with your actual Gemini API key
     model_name = "gemini-1.5-pro-latest"  
     llm = ChatGoogleGenerativeAI(api_key=gemini_api_key, model=model_name)
     return llm
