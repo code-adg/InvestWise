@@ -1,6 +1,6 @@
 export interface QuestionnaireData {
   age: number;
-  investmentFor: 'myself' | 'kids' | 'parents';
+  investmentFor: 'myself' | 'kids' | 'parents' | any;
   investmentTerm: 'short-term' | 'long-term';
   investmentType: 'recurring' | 'lumpsum';
   frequency?: 'monthly' | 'fortnightly';

@@ -8,7 +8,8 @@ import { ChatBot } from './components/ChatBot';
 import { Home } from './pages/Home';
 import { SchemeDetails } from './pages/SchemeDetails';
 import { SavedSchemes } from './pages/SavedSchemes';
-import { HomePage } from './pages/HomePage';
+import { InvestmentsAdvisor } from './pages/InvestmentsAdvisor';
+
 function App() {
   return (
     <ThemeProvider>
@@ -21,7 +22,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/scheme/:id" element={<SchemeDetails />} />
                 <Route path="/saved" element={<SavedSchemes />} />
-                <Route path="/investments" element={<HomePage/>}/>
+                <Route path="/investments" element={<InvestmentsAdvisor/>}/>
               </Routes>
             </main>
             <Footer />

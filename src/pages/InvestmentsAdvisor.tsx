@@ -82,7 +82,7 @@ const investmentOptions: InvestmentOption[] = [
   }
 ];
 
-export const HomePage = () => {
+export const InvestmentsAdvisor = () => {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<QuestionnaireData>({
     age: 0,
