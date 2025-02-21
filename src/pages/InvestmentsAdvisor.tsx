@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Question } from '../components/Question';
 import { RecommendationCard } from '../components/RecommendationCard';
@@ -82,7 +82,7 @@ const investmentOptions: InvestmentOption[] = [
   }
 ];
 
-export const HomePage = () => {
+export const InvestmentsAdvisor = () => {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<QuestionnaireData>({
     age: 0,
