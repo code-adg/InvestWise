@@ -1,17 +1,17 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from langchain.prompts import PromptTemplate
-from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import LLMChain
 
 app = Flask(__name__)
 CORS(app)
 
-# Initialize Groq LLM with API Key
+# Initialize Gemini LLM with API Key
 def initialize_llm():
-    groq_api_key = "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"
-    model_name = "llama-3.3-70b-versatile"  
-    llm = ChatGroq(api_key=groq_api_key, model=model_name)
+    gemini_api_key = "AIzaSyAEzctJ3QK61LAUjmIoTEvDuTV9FFKt-vc"  # Replace with your actual Gemini API key
+    model_name = "gemini-1.5-pro-latest"  
+    llm = ChatGoogleGenerativeAI(api_key=gemini_api_key, model=model_name)
     return llm
 
 prompt_template = PromptTemplate(
@@ -25,19 +25,16 @@ prompt_template = PromptTemplate(
 
     Provide actionable steps, potential risks, and benefits if applicable.
     
-    *IMPORTANT:* Format your response in plain text only. Do not use markdown, bullet points, or special formatting.
+    IMPORTANT: Format your response in plain text only. Do not use markdown.
     """
 )
-
 
 def create_financial_planner_chain(llm):
     chain = LLMChain(llm=llm, prompt=prompt_template)
     return chain
 
-
 llm = initialize_llm()
 financial_planner_chain = create_financial_planner_chain(llm)
-
 
 @app.route('/ask', methods=['POST'])
 def handle_query():
@@ -51,5 +48,5 @@ def handle_query():
     
     return jsonify({"response": response})
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
