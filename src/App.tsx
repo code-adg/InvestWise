@@ -9,6 +9,9 @@ import { Home } from './pages/Home';
 import { SchemeDetails } from './pages/SchemeDetails';
 import { SavedSchemes } from './pages/SavedSchemes';
 import { HomePage } from './pages/HomePage';
+import {Login} from './components/Login'
+import {SignUp} from './components/SignUp'
+
 function App() {
   return (
     <ThemeProvider>
@@ -22,6 +25,8 @@ function App() {
                 <Route path="/scheme/:id" element={<SchemeDetails />} />
                 <Route path="/saved" element={<SavedSchemes />} />
                 <Route path="/investments" element={<HomePage/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/signUp' element={<SignUp/>}/>
               </Routes>
             </main>
             <Footer />
