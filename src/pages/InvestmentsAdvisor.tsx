@@ -2,85 +2,8 @@ import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Question } from '../components/Question';
 import { RecommendationCard } from '../components/RecommendationCard';
-import { QuestionnaireData, InvestmentOption } from '../types/investment';
+import { QuestionnaireData, investmentOptions } from '../types/investment';
 
-const investmentOptions: InvestmentOption[] = [
-  {
-    id: 'sip-equity',
-    name: 'Equity Mutual Fund SIP',
-    description: 'Systematic investment in diversified equity funds for long-term wealth creation',
-    icon: '📈',
-    riskLevel: 'Medium',
-    minInvestment: 500,
-    expectedReturns: '12-15% p.a.',
-    suitabilityScore: 0,
-    recommendedFor: [
-      'Long-term investors',
-      'Regular income earners',
-      'Those seeking wealth creation'
-    ]
-  },
-  {
-    id: 'child-plan',
-    name: 'Child Education Plan',
-    description: 'Hybrid investment plan combining insurance and investment for child\'s future',
-    icon: '👶',
-    riskLevel: 'Low',
-    minInvestment: 2000,
-    expectedReturns: '8-10% p.a.',
-    suitabilityScore: 0,
-    recommendedFor: [
-      'Parents planning for child\'s education',
-      'Long-term systematic investors',
-      'Those seeking insurance + investment'
-    ]
-  },
-  {
-    id: 'senior-fd',
-    name: 'Senior Citizen Fixed Deposit',
-    description: 'Special fixed deposit scheme with higher interest rates for senior citizens',
-    icon: '👴',
-    riskLevel: 'Low',
-    minInvestment: 10000,
-    expectedReturns: '7.5-8.5% p.a.',
-    suitabilityScore: 0,
-    recommendedFor: [
-      'Senior citizens',
-      'Conservative investors',
-      'Those seeking regular income'
-    ]
-  },
-  {
-    id: 'balanced-fund',
-    name: 'Balanced Advantage Fund',
-    description: 'Dynamic asset allocation between equity and debt based on market conditions',
-    icon: '⚖️',
-    riskLevel: 'Medium',
-    minInvestment: 1000,
-    expectedReturns: '10-12% p.a.',
-    suitabilityScore: 0,
-    recommendedFor: [
-      'First-time investors',
-      'Risk-averse equity investors',
-      'Those seeking moderate returns'
-    ]
-  },
-  {
-    id: 'gold-etf',
-    name: 'Gold ETF',
-    description: 'Electronic investment in gold without physical storage',
-    icon: '💰',
-    riskLevel: 'Medium',
-    minInvestment: 1000,
-    expectedReturns: '8-10% p.a.',
-    suitabilityScore: 0,
-    recommendedFor: [
-      'Gold enthusiasts',
-      'Portfolio diversification',
-      'Long-term wealth preservation'
-    ]
-  }
-];
 
 export const InvestmentsAdvisor = () => {
   const [step, setStep] = useState(0);
