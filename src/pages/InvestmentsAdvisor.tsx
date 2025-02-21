@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Question } from '../components/Question';
 import { RecommendationCard } from '../components/RecommendationCard';
