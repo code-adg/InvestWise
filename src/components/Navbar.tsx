@@ -23,6 +23,7 @@ export const Navbar = () => {
             <Link to="/investments" className='nav-link'>Investement Advisor</Link>
             <Link to="/video-guides" className="nav-link">Video Guides</Link>
             <Link to="/about" className="nav-link">About</Link>
+            <Link to="/advice" className='nav-link'>Advice</Link>
             <ThemeToggle />
           </div>
         </div>
