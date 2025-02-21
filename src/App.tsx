@@ -9,6 +9,7 @@ import { Home } from './pages/Home';
 import { SchemeDetails } from './pages/SchemeDetails';
 import { SavedSchemes } from './pages/SavedSchemes';
 import { InvestmentsAdvisor } from './pages/InvestmentsAdvisor';
+import { VideoGuides } from './pages/VideoGuides';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/scheme/:id" element={<SchemeDetails />} />
                 <Route path="/saved" element={<SavedSchemes />} />
                 <Route path="/investments" element={<InvestmentsAdvisor/>}/>
+                <Route path="/video-guides" element={<VideoGuides />} />
               </Routes>
             </main>
             <Footer />
