@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
 import { Wallet } from 'lucide-react';
 
+
 export const Navbar = () => {
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-md">
@@ -23,6 +24,7 @@ export const Navbar = () => {
             <Link to="/saved" className="nav-link">Saved Schemes</Link>
             <Link to="/about" className="nav-link">About</Link>
             <Link to="/investments" className='nav-link'>Investement Advisor</Link>
+            <Link to="/swp" className='nav-link'>Swp</Link>
             <ThemeToggle />
           </div>
         </div>

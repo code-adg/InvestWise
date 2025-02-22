@@ -9,6 +9,7 @@ import { Home } from './pages/Home';
 import { SchemeDetails } from './pages/SchemeDetails';
 import { SavedSchemes } from './pages/SavedSchemes';
 import { HomePage } from './pages/HomePage';
+
 function App() {
   return (
     <ThemeProvider>

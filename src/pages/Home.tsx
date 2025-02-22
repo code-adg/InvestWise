@@ -9,6 +9,7 @@ import { useSavedSchemes } from '../contexts/SavedSchemesContext';
 import { WebinarSlider } from '../components/WebinarSlider';
 import type { InvestmentScheme } from '../types';
 
+
 const schemes: InvestmentScheme[] = [
   // Fixed Capital Schemes
   {
@@ -68,8 +69,8 @@ const schemes: InvestmentScheme[] = [
     category: 'fixed'
   },
   {
-    id: 'post-office',
-    title: 'Post Office Schemes',
+    id:"suku",
+      title: 'Sukanya Samriddhi Yojana',
     description: 'Government backed savings schemes',
     icon: 'Wallet',
     path: '/scheme/post-office',
@@ -123,7 +124,7 @@ const schemes: InvestmentScheme[] = [
     description: 'Regular investment in mutual funds',
     icon: 'Calculator',
     path: '/scheme/sip',
-    category: 'recurring'
+    category: 'recurring',
   }
 ];
 
