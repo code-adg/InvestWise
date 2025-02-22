@@ -7,7 +7,7 @@ interface Props {
   index: number;
 }
 
-export const RecommendationCard: React.FC<Props> = ({ option, index }) => {
+export const RecommendationCard: React.FC<Props> = ({ option, index }: Props) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}

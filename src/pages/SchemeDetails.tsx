@@ -266,7 +266,7 @@ export const SchemeDetails = () => {
         {/* Render SIP Calculator only for SIP */}
         {id === 'sip' && <SIPCalculator />}
         {id==="fd" && <FDCalculator/>}
-        {id==="rd" && <FDCalculator/>}
+        {id==="rd" && <RDCalculator/>}
         {id==="pension" && <POMISCalculator/>}
         {id==="suku" && <SSYCalculator/>}
         {id==="swp" && <SWPCalculator/>}
