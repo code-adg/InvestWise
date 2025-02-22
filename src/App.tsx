@@ -7,10 +7,14 @@ import { ChatBot } from './components/ChatBot';
 import { Home } from './pages/Home';
 import { SchemeDetails } from './pages/SchemeDetails';
 import { SavedSchemes } from './pages/SavedSchemes';
-import { Login } from './components/Login'
-import { SignUp } from './components/SignUp'
+<<<<<<< HEAD
+import { HomePage } from './pages/HomePage';
+import {Login} from './components/Login'
+import {SignUp} from './components/SignUp'
+=======
 import { InvestmentsAdvisor } from './pages/InvestmentsAdvisor';
 import { VideoGuides } from './pages/VideoGuides';
+import { Advice } from './components/Advicers';
 
 function App() {
   return (
@@ -28,6 +32,7 @@ function App() {
                 <Route path='/signUp' element={<SignUp/>}/>
                 <Route path="/investments" element={<InvestmentsAdvisor/>}/>
                 <Route path="/video-guides" element={<VideoGuides />} />
+                <Route path="/advice" element={<Advice/>}/>
               </Routes>
             </main>
             <Footer />
