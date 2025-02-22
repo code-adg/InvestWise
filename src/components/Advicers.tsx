@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Calendar, Clock, Award, Briefcase, User, CheckCircle } from 'lucide-react';
-import { Professional, BookedMeeting } from '../types';
+import { useState } from 'react';
+import { Professional, BookedMeeting } from '../types/advice';
 import ProfessionalCard from './ProfessionalCard';
 import BookedMeetings from './BookedMeetings';
 

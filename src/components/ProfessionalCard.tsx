@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, Award, Briefcase, Star } from 'lucide-react';
-import { Professional } from '../types';
+import { Clock, Award, Briefcase, Star } from 'lucide-react';
+import { Professional } from '../types/advice';
 
 interface ProfessionalCardProps {
   professional: Professional;

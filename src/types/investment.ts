@@ -1,4 +1,5 @@
 export interface QuestionnaireData {
+  timePeriod: number;
   age: number;
   investmentFor: 'myself' | 'kids' | 'parents' | any;
   investmentTerm: 'short-term' | 'long-term';
@@ -10,6 +11,7 @@ export interface QuestionnaireData {
 }
 
 export interface InvestmentOption {
+  term: string;
   category: string;
   id: string;
   name: string;

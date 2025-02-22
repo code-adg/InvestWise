@@ -1,23 +1,31 @@
 import os
 import requests
-from flask import Flask, request, jsonify, render_template
+import logging
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from langchain.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import LLMChain
 from dotenv import load_dotenv
 
+# Load environment variables
 load_dotenv()
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+
+# Initialize Flask app
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins="http://localhost:5173")  # Allow requests from the frontend
 
 # Initialize Gemini LLM with API Key
 def initialize_llm():
-    gemini_api_key =os.getenv("GEMINI_API_KEY")  # Use environment variable for security
+    gemini_api_key = os.getenv("GEMINI_API_KEY")  # Use environment variable for security
     model_name = "gemini-1.5-pro-latest"
     llm = ChatGoogleGenerativeAI(api_key=gemini_api_key, model=model_name)
     return llm
 
+# Define prompt template
 prompt_template = PromptTemplate(
     input_variables=["user_query"],
     template="""
@@ -33,19 +41,16 @@ prompt_template = PromptTemplate(
     """
 )
 
+# Create financial planner chain
 def create_financial_planner_chain(llm):
     chain = LLMChain(llm=llm, prompt=prompt_template)
     return chain
 
+# Initialize LLM and chain
 llm = initialize_llm()
 financial_planner_chain = create_financial_planner_chain(llm)
 
-
-"""@app.route('/')
-def index():
-    return render_template('index.html')"""
-
-
+# Route to handle user queries
 @app.route('/ask', methods=['POST'])
 def handle_query():
     data = request.json
@@ -58,9 +63,9 @@ def handle_query():
     
     return jsonify({"response": response})
 
-# New route to fetch YouTube video links
-youtubeApi=os.getenv("YOUTUBE_API_KEY") # Use environment variable for security
-baseUrl=os.getenv("BASE_URL")
+# Route to fetch YouTube video links
+YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")  # Use environment variable for security
+BASE_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 @app.route('/get_videos', methods=['POST'])
 def get_video_links():
@@ -72,24 +77,78 @@ def get_video_links():
 
     params = {
         'part': 'snippet',
-        'q': f'{question} telugu',  # Add Telugu filter
-        'key': youtubeApi,
+        'q': question,
+        'key': YOUTUBE_API_KEY,
         'type': 'video',
-        'maxResults': 5,
-        'relevanceLanguage': 'te',  # Telugu language code
-        'regionCode': 'IN'  # India region
+        'maxResults': 5
     }
 
-    response = requests.get(baseUrl, params=params)
-    data = response.json()
+    try:
+        response = requests.get(BASE_URL, params=params)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        data = response.json()
 
-    if 'error' in data:
-        return jsonify({"error": data['error']['message']}), 400
+        if 'error' in data:
+            logging.error(f"YouTube API error: {data['error']['message']}")
+            return jsonify({"error": data['error']['message']}), 400
 
-    video_links = [f'https://www.youtube.com/watch?v={item["id"]["videoId"]}' 
-                 for item in data.get('items', [])]
-    
-    return jsonify({"videos": video_links})
+        video_links = [f'https://www.youtube.com/watch?v={item["id"]["videoId"]}' for item in data.get('items', [])]
+        return jsonify({"videos": video_links})
 
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error fetching videos from YouTube API: {e}")
+        return jsonify({"error": "Failed to fetch videos from YouTube API."}), 500
+
+# Route to get investment recommendations
+@app.route('/get_investment_options', methods=['POST'])
+def get_investment_options():
+    data = request.json
+    logging.debug(f"Received data: {data}")  # Log incoming data
+
+    age = data.get("age")
+    horizon = data.get("horizon")
+    period = data.get("period")
+    investment_type = data.get("investment_type")
+    amount = data.get("amount")
+
+    if None in [age, horizon, period, investment_type, amount]:
+        logging.error("Missing required fields in request")
+        return jsonify({"error": "All fields are required."}), 400
+
+    recommendations = get_investment_recommendations(age, horizon, period, investment_type, amount)
+    logging.debug(f"Generated recommendations: {recommendations}")  # Log recommendations
+
+    return jsonify({"recommended_investments": recommendations})
+
+# Function to recommend investments
+def get_investment_recommendations(age, horizon, period, investment_type, amount):
+    investments = [
+        {"name": "Real Estate Investment", "age_range": (25, 50), "horizon": "long", "min_period": 5, "type": "lumpsum", "risk": "medium-high"},
+        {"name": "Fixed Deposit", "age_range": (0, 100), "horizon": "both", "min_period": 1, "type": "lumpsum", "risk": "low"},
+        {"name": "Gold Investment", "age_range": (0, 100), "horizon": "both", "min_period": 0, "type": "lumpsum", "risk": "medium"},
+        {"name": "Share Market", "age_range": (20, 45), "horizon": "long", "min_period": 5, "type": "both", "risk": "high"},
+        {"name": "SWP Mutual Funds", "age_range": (35, 100), "horizon": "long", "min_period": 5, "type": "recurring", "risk": "medium"},
+        {"name": "Index Funds", "age_range": (20, 50), "horizon": "long", "min_period": 5, "type": "both", "risk": "medium"},
+        {"name": "ULIP Plans", "age_range": (25, 45), "horizon": "long", "min_period": 10, "type": "recurring", "risk": "medium"},
+        {"name": "Post Office Schemes", "age_range": (30, 100), "horizon": "both", "min_period": 1, "type": "recurring", "risk": "low"},
+        {"name": "Startup Investment", "age_range": (25, 40), "horizon": "long", "min_period": 5, "type": "lumpsum", "risk": "high"},
+        {"name": "Senior Citizen Savings", "age_range": (60, 100), "horizon": "long", "min_period": 5, "type": "lumpsum", "risk": "low"},
+        {"name": "REIT", "age_range": (25, 50), "horizon": "long", "min_period": 5, "type": "lumpsum", "risk": "medium"},
+        {"name": "LIC", "age_range": (0, 100), "horizon": "both", "min_period": 0, "type": "both", "risk": "low-medium"}
+    ]
+
+    recommended = []
+    for inv in investments:
+        age_ok = inv["age_range"][0] <= age <= inv["age_range"][1]
+        horizon_ok = inv["horizon"] == horizon.lower() or inv["horizon"] == "both"
+        period_ok = period >= inv["min_period"]
+        type_ok = inv["type"] == investment_type.lower() or inv["type"] == "both"
+
+        if age_ok and horizon_ok and period_ok and type_ok:
+            recommended.append(inv["name"])
+
+    return recommended
+
+# Run the app
 if __name__ == "__main__":
     app.run(debug=True)

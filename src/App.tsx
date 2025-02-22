@@ -7,11 +7,8 @@ import { ChatBot } from './components/ChatBot';
 import { Home } from './pages/Home';
 import { SchemeDetails } from './pages/SchemeDetails';
 import { SavedSchemes } from './pages/SavedSchemes';
-<<<<<<< HEAD
-import { HomePage } from './pages/HomePage';
-import {Login} from './components/Login'
-import {SignUp} from './components/SignUp'
-=======
+import { Login } from './components/Login'
+import { SignUp } from './components/SignUp'
 import { InvestmentsAdvisor } from './pages/InvestmentsAdvisor';
 import { VideoGuides } from './pages/VideoGuides';
 import { Advice } from './components/Advicers';
