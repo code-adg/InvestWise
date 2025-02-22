@@ -17,10 +17,6 @@ export const InvestmentsAdvisor = () => {
     timePeriod: 0,
   });
 
-  const filteredInvestmentOptions = investmentOptions.filter(option => 
-    data.investmentTerm === 'short-term' ? option.term === 'short-term' : option.term === 'long-term'
-  );
-
   const questions = [
     {
       question: "What's your age?",
@@ -121,18 +117,12 @@ export const InvestmentsAdvisor = () => {
         <input
           type="number"
           value={data.duration || ''}
-          onChange={(e) => {
-            const val = parseInt(e.target.value);
-            const isValid = data.investmentTerm === 'short-term'
-              ? val >= 1 && val <= 5
-              : val > 7;
-            setData({ ...data, duration: isValid ? val : data.duration });
-          }}
+          onChange={(e) => setData({ ...data, duration: parseInt(e.target.value) })}
           className="w-full bg-gray-700 text-white rounded-lg p-4 focus:ring-2 focus:ring-blue-500"
-          placeholder={data.investmentTerm === 'short-term' ? "Enter between 1-5 years" : "Enter more than 7 years"}
+          placeholder="Enter number of years"
         />
       ),
-      isValid: () => data.investmentTerm === 'short-term' ? (data.duration >= 1 && data.duration <= 5) : (data.duration > 7)
+      isValid: () => data.duration > 0
     }
   ];
 
@@ -163,7 +153,7 @@ export const InvestmentsAdvisor = () => {
                 Here are your personalized investment recommendations
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredInvestmentOptions.map((option) => (
+                {investmentOptions.map((option) => (
                   <RecommendationCard 
                     key={option.id} 
                     option={option} 

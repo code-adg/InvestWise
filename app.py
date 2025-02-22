@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app, origins="http://localhost:5173")  # Allow requests from the frontend
+CORS(app)  # Allow requests from the frontend
 
 # Initialize Gemini LLM with API Key
 def initialize_llm():
@@ -110,6 +110,7 @@ def get_investment_options():
     period = data.get("period")
     investment_type = data.get("investment_type")
     amount = data.get("amount")
+    print(amount)
 
     if None in [age, horizon, period, investment_type, amount]:
         logging.error("Missing required fields in request")
@@ -146,6 +147,7 @@ def get_investment_recommendations(age, horizon, period, investment_type, amount
 
         if age_ok and horizon_ok and period_ok and type_ok:
             recommended.append(inv["name"])
+        print(recommended)
 
     return recommended
 
