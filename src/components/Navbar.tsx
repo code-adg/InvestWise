@@ -24,7 +24,6 @@ export const Navbar = () => {
             <Link to="/saved" className="nav-link">Saved Schemes</Link>
             <Link to="/about" className="nav-link">About</Link>
             <Link to="/investments" className='nav-link'>Investement Advisor</Link>
-            <Link to="/swp" className='nav-link'>Swp</Link>
             <ThemeToggle />
           </div>
         </div>

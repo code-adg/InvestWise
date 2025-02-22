@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Calculator } from 'lucide-react';
 import { SIPCalculator } from '../components/sip';
 import {FDCalculator} from '../components/fd'
-import {POMISCalculator} from '../components/pmis'
+import POMISCalculator from '../components/pmis'
 import {SWPCalculator}   from '../components/swp'
 import {SSYCalculator} from '../components/ssys';
 import {RDCalculator} from '../components/rd';
