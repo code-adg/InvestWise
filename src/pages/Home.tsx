@@ -233,7 +233,9 @@ const SchemeCard: React.FC<SchemeCardProps> = ({
         />
       </button>
       <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 mb-4">
-        <IconComponent className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+      <span className="h-6 w-6 text-blue-600 dark:text-blue-400">
+        <IconComponent/>
+        </span>
       </div>
       <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{scheme.title}</h3>
       <p className="text-gray-600 dark:text-gray-400">{scheme.description}</p>

@@ -22,7 +22,7 @@ const ProfessionalCard: React.FC<ProfessionalCardProps> = ({ professional, onBoo
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden">
       <div className="p-6">
         <div className="flex items-center space-x-4">
           <img
@@ -31,21 +31,21 @@ const ProfessionalCard: React.FC<ProfessionalCardProps> = ({ professional, onBoo
             className="h-16 w-16 rounded-full object-cover"
           />
           <div>
-            <h3 className="text-xl font-semibold text-gray-900">{professional.name}</h3>
-            <p className="text-gray-600">{professional.title}</p>
+            <h3 className="text-xl text-white font-semibold text-gray-900">{professional.name}</h3>
+            <p className="text-white">{professional.title}</p>
           </div>
         </div>
 
         <div className="mt-4 space-y-3">
-          <div className="flex items-center text-gray-600">
+          <div className="flex items-center text-white">
             <Briefcase className="h-5 w-5 mr-2" />
             <span>{professional.experience}</span>
           </div>
-          <div className="flex items-center text-gray-600">
+          <div className="flex items-center text-white">
             <Award className="h-5 w-5 mr-2" />
             <span>{professional.expertise.join(', ')}</span>
           </div>
-          <div className="flex items-center text-gray-600">
+          <div className="flex items-center text-white">
             <Clock className="h-5 w-5 mr-2" />
             <span>{professional.availability[0]}</span>
           </div>

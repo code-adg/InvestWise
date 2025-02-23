@@ -51,10 +51,10 @@ export function Advice() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm">
+    <div className="min-h-screen bg-gray-900 text-white">
+      <header className="bg-gray-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">Professional Connect</h1>
+          <h1 className="text-3xl font-bold text-white">Professional Connect</h1>
         </div>
       </header>
 
@@ -65,7 +65,7 @@ export function Advice() {
             className={`px-4 py-2 rounded-lg font-medium ${
               activeTab === 'professionals'
                 ? 'bg-blue-600 text-white'
-                : 'bg-white text-gray-600 hover:bg-gray-50'
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
             }`}
           >
             Available Professionals
@@ -75,7 +75,7 @@ export function Advice() {
             className={`px-4 py-2 rounded-lg font-medium ${
               activeTab === 'booked'
                 ? 'bg-blue-600 text-white'
-                : 'bg-white text-gray-600 hover:bg-gray-50'
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
             }`}
           >
             Booked Meetings
@@ -99,4 +99,3 @@ export function Advice() {
     </div>
   );
 }
-
