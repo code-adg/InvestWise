@@ -65,7 +65,7 @@ def handle_query():
 
 # Route to fetch YouTube video links
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")  # Use environment variable for security
-BASE_URL = 'https://www.googleapis.com/youtube/v3/search'
+BASE_URL = os.getenv("BASE_URL")
 
 @app.route('/get_videos', methods=['POST'])
 def get_video_links():
