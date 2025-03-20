@@ -1,3 +1,5 @@
+//InvestmentsAdvisor.tsx
+
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Question } from '../components/Question';
