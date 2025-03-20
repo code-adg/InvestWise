@@ -7,6 +7,7 @@ from langchain.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import LLMChain
 from dotenv import load_dotenv
+from bs4 import BeautifulSoup
 
 # Load environment variables
 load_dotenv()
@@ -150,6 +151,66 @@ def get_investment_recommendations(age, horizon, period, investment_type, amount
         print(recommended)
 
     return recommended
+
+
+
+def get_lic_policies():
+    url = "https://licindia.in/insurance-plan"
+    headers = {"User-Agent": "Mozilla/5.0"}
+    
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        
+        soup = BeautifulSoup(response.text, "html.parser")
+        
+        # Categories to scrape
+        target_categories = {"Endowment Plans", "Money Back Plans", "Term Insurance Plans", "Pension Plans"}
+        policy_categories = {}
+
+        # Find all accordion items which represent categories
+        for accordion_item in soup.find_all("div", class_="accordion-item"):
+            category_button = accordion_item.find("button", class_="accordion-button")
+            if not category_button:
+                continue
+            
+            category_name = category_button.text.strip()
+            
+            if category_name in target_categories:
+                policies = []
+                table = accordion_item.find("table", class_="table")
+                if table:
+                    for row in table.find("tbody").find_all("tr"):
+                        cols = row.find_all("td")
+                        if len(cols) >= 2:
+                            link_tag = cols[1].find("a")
+                            if link_tag:
+                                title = link_tag.text.strip()
+                                link = link_tag["href"]
+                                description = cols[2].text.strip() if len(cols) > 2 else ""
+                                if not link.startswith("http"):
+                                    link = "https://licindia.in" + link
+                                policies.append({
+                                    "title": title,
+                                    "link": link,
+                                    "description": description
+                                })
+                
+                policy_categories[category_name] = policies
+
+        return policy_categories
+    except requests.RequestException as e:
+        return {"error": f"Failed to fetch data: {str(e)}"}
+    except Exception as e:
+        return {"error": f"An unexpected error occurred: {str(e)}"}
+
+@app.route("/lic_policies")
+def lic_policies():
+    policies = get_lic_policies()
+    return jsonify(policies)
+
+
+
 
 # Run the app
 if __name__ == "__main__":
