@@ -7,6 +7,7 @@ export interface QuestionnaireData {
   amount: number;
   duration: number;
   currentCorpus?: number;
+  timePeriod: number;
 }
 
 export interface InvestmentOption {
