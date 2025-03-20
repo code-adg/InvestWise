@@ -21,7 +21,6 @@ export const Navbar = () => {
             <Link to="/" className="nav-link">Home</Link>
             {/* <Link to="/profile" className="nav-link">Profile</Link> */}
             <Link to="/saved" className="nav-link">Saved Schemes</Link>
-            {/* <Link to="/investments" className='nav-link'>Investments Advisor</Link> */}
             <Link to="/investments_2" className='nav-link'>Investments Advisor</Link>
             <Link to="/video-guides" className="nav-link">Video Guides</Link>
             {/* <Link to="/about" className="nav-link">About</Link> */}
