@@ -139,11 +139,13 @@ export default function Invest2() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <div className="max-w-5xl w-full bg-white shadow-xl rounded-lg p-10">
-        <div className="flex items-center justify-center mb-8">
+    <div className="p-6 bg-transparent dark:bg-gray-900 text-gray-900 dark:text-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-center mb-12">
           <Briefcase className="text-blue-500 w-10 h-10 mr-3" />
-          <h1 className="text-4xl font-bold text-gray-800">Investment Advisor</h1>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            Smart Investment Advisor
+          </h1>
         </div>
 
         {error && (
